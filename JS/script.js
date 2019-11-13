@@ -1,86 +1,113 @@
-   // 1
-   window.onload = (e) => {document.querySelector("#search").onclick = searchButtonClicked};
-	
-   // 2
-   let displayTerm = "";
-   
-   // 3
-   function searchButtonClicked(){
-       console.log("searchButtonClicked() called");
 
-       //https://developer.edamam.com/food-database-api
-       const RECIPE_URL = "http://www.recipepuppy.com/api/?";
+let displayTerm = "";
 
-       let url = RECIPE_URL;
+function createCORSRequest(method, url) {
+    var xhr = new XMLHttpRequest();
+    if ("withCredentials" in xhr) {
+        // XHR for Chrome/Firefox/Opera/Safari.
+        xhr.open(method, url, true);
+    } else if (typeof XDomainRequest != "undefined") {
+        // XDomainRequest for IE.
+        xhr = new XDomainRequest();
+        xhr.open(method, url);
+    } else {
+        // CORS not supported.
+        xhr = null;
+    }
+    return xhr;
+}
 
-       let term = document.querySelector("#searchterm").value;
-       displayTerm = term;
+// Make the actual CORS request.
+function makeCorsRequest() {
+    let app_id = "df268d73";
+    let app_key = "97e95525fd197c05a011ec8010791668";
+    let recipe = document.querySelector('#recipe').value;
+    let pre = document.querySelector('#response');
 
-       term = term.trim();
+    var url = 'https://api.edamam.com/search?app_id=' + app_id + '&app_key=' + app_key;
 
-       term = encodeURIComponent(term);
+    var xhr = createCORSRequest('POST', url);
+    if (!xhr) {
+        alert('CORS not supported');
+        return;
+    }
 
-       if(term.length < 1) return;
+    let term = document.querySelector('#recipe').value;
+    displayTerm = term;
 
-       url += "q=" + term;
+    term = term.trim();
 
-    //    let limit = document.querySelector("#limit").value;
-    //    url += "&limit=" + limit;
+    term = encodeURIComponent(term);
 
-       document.querySelector("#status").innerHTML = "<b>Searching for '" + displayTerm + "'</b><br><img src='Media/gif_finder_images/spinner.gif'>";
-       
-       console.log(url);
+    url += "&q=" + term;
 
-       getData(url);
-   }
-   
-   function getData(url){
+    console.log(url);
 
-       let xhr = new XMLHttpRequest();
+    // // Response handlers.
+    // xhr.onload = function() {
+    //   var text = xhr.responseText;
+    //   pre.innerHTML = text;
+    // };
 
-       xhr.onload = dataLoaded;
+    // xhr.onerror = function() {
+    //   alert('Woops, there was an error making the request.');
+    // };
 
-       xhr.onerror = dataError;
+    // pre.innerHTML = 'Loading...';
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    // xhr.send(recipe);
+    getData(url);
+}
 
-       xhr.open("GET", url);
-       xhr.send();
-   }
+function getData(url) {
 
-   function dataLoaded(e) {
-       let xhr = e.target;
+    let xhr = new XMLHttpRequest();
 
-       console.log(xhr.responseText);
+    xhr.onload = dataLoaded;
 
-       let obj = JSON.parse(xhr.responseText);
+    xhr.onerror = function () {
+        alert('Woops, there was an error making the request.');
+    };
 
-       if(!obj.data || obj.data.length == 0){
-           document.querySelector("#status").innerHTML = "<b>No results found for '" + displayTerm + "'</b>";
-           return;
-       }
+    xhr.open("GET", url);
+    xhr.send();
+}
 
-       let results = obj.data;
-       console.log("reulsts.length = " + results.length);
-       let bigString = "<p><i>Here are " + results.length + " results for '" + displayTerm + "'</i></p>";
+function dataLoaded(e) {
+    let xhr = e.target;
 
-       for(let i = 0; i < results.length; i++){
-           let result = results[i];
+    //console.log(xhr.responseText);
 
-           let smallURL = result.images.fixed_width_small.url;
-           if(!smallURL) smallURL = "Media/gif_finder_images/no-image-found.png";
+    let obj = JSON.parse(xhr.responseText);
 
-           let url = result.url;
-           let rating = result.rating.toUpperCase();
-           let line = `<div class='result'><img src='${smallURL}' title='${result.id}' />`;
-           line += `<span><a target='_blank' href='${url}'> View on Giphy </a></span><div>Rating: ${rating}</div></div>`;
+    console.log(obj.hits);
 
-           bigString += line;
-       }
+    if (!obj.hits || obj.hits.length == 0) {
+        document.querySelector("#status").innerHTML = "<b>No results found for '" + displayTerm + "'</b>";
+        return;
+    }
 
-       document.querySelector('#content').innerHTML = bigString;
+    let results = obj.hits;
+    console.log("reulsts.length = " + results.length);
+    let bigString = "<p><i>Here are " + results.length + " results for '" + displayTerm + "'</i></p>";
 
-       document.querySelector('#status').innerHTML = "<b>Success!</b>"
-   }
+    for (let i = 0; i < results.length; i++) {
+        let result = results[i];
 
-   function dataError(e) {
-       console.log("An error occurred");
-   }
+        let smallURL = result.recipe.image;
+        if (!smallURL) smallURL = "Media/gif_finder_images/no-image-found.png";
+
+        let url = result.recipe.url;
+        let line = `<div class='result'><img src='${smallURL}' title='${result.id}' />`;
+        line += `<span><a target='_blank' href='${url}'> View on Edamam </a></span></div>`;
+
+        bigString += line;
+    }
+
+    document.querySelector('#content').innerHTML = bigString;
+
+    document.querySelector('#status').innerHTML = "<b>Success!</b>"
+}
+
+
+document.querySelector("#search").addEventListener("click", makeCorsRequest);
