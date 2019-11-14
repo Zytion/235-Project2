@@ -1,4 +1,44 @@
+body {
+    background-color: #FBFEF9;
+}
+h1 {
+    margin: 1rem auto;
+    text-align: center;
+}
+header {
+    padding: 1rem 1rem;
+    border-radius: 15px;
+    width: 80%;
+    margin: 0 auto;
+    background-color: #2F6690;
+
+    display: flex;
+    flex-flow: row nowrap;
+}
+header > .widgets {
+    margin-right: 1rem;
+}
+
 #content {
     display: flex;
     flex-flow: row wrap;
+    justify-content: left;
+}
+#content > p {
+    width: 100%;
+}
+.result {
+    position: relative;
+    border: 1px solid black;
+    padding: 1rem;
+    width: 25rem;
+    align-content: center;
+}
+.result img {
+    max-width: 100%;
+}
+.result span {
+    position: absolute;
+    margin: 0 auto;
+    bottom: 0;
 }
