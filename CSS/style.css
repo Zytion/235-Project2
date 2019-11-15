@@ -40,7 +40,7 @@ header > .widgets {
 #content {
     display: flex;
     flex-flow: row wrap;
-    justify-content: left;
+    justify-content: space-around;
     clear: both;
 }
 #content > p {
@@ -50,7 +50,7 @@ header > .widgets {
     position: relative;
     border: 1px solid black;
     padding: 1rem;
-    width: 25rem;
+    width: 15%;
     align-content: center;
 }
 .result img {
@@ -60,4 +60,10 @@ header > .widgets {
     position: absolute;
     margin: 0 auto;
     bottom: 0;
+}
+#navButtons {
+    display: flex;
+    flex-flow: row-reverse nowrap;
+    justify-content: space-evenly;
+    padding: 1em;
 }

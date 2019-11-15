@@ -1,6 +1,10 @@
 
 let displayTerm = "";
 
+let results;
+
+let page = 0;
+
 window.onload = function(){
     if (localStorage.getItem("savedRecipe") != null) {
         document.querySelector('#recipe').value = localStorage.getItem("savedRecipe");
@@ -48,6 +52,7 @@ function makeCorsRequest() {
     term = encodeURIComponent(term);
 
     url += "&q=" + term;
+    url += "&to=99";
 
     console.log(url);
 
@@ -95,11 +100,17 @@ function dataLoaded(e) {
         return;
     }
 
-    let results = obj.hits;
+    results = obj.hits;
     console.log("reulsts.length = " + results.length);
-    let bigString = "<p><i>Here are " + results.length + " results for '" + displayTerm + "'</i></p>";
+    page = 0;
+    showResults();
+}
 
-    for (let i = 0; i < results.length; i++) {
+function showResults() {
+    let bigString = "<p><i>Here are 10 results for '" + displayTerm + "'</i></p>";
+
+    for(let i = page; i < page + 10; i++)
+    {
         let result = results[i];
 
         let smallURL = result.recipe.image;
@@ -107,15 +118,35 @@ function dataLoaded(e) {
 
         let url = result.recipe.url;
         let line = `<div class='result'><img src='${smallURL}' title='${result.id}' />`;
-        line += `<span><a target='_blank' href='${url}'> View on Edamam </a></span></div>`;
+        line += `<div><a target='_blank' href='${url}'> View on Edamam </a></div></div>`;
 
         bigString += line;
     }
 
     document.querySelector('#content').innerHTML = bigString;
 
-    document.querySelector('#status').innerHTML = "<b>Success!</b>"
+    document.querySelector('#status').innerHTML = "<b>Success!</b>";
 }
 
+function navClick(e) {
+    if(e.target.value == "next" && page < 90)
+    {
+        page += 10;
+    }
+    else if(page > 0)
+    {
+        page -= 10;
+    }
+    else
+    {
+        alert("Cannot show any more Recipies")
+    }
+    showResults();
+}
 
+const navButtons = document.querySelectorAll('#navButtons button');
+for(let navButton of navButtons)
+{
+    navButton.addEventListener("click", navClick);
+}
 document.querySelector("#search").addEventListener("click", makeCorsRequest);
