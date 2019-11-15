@@ -1,10 +1,28 @@
 body {
     background-color: #FBFEF9;
+    margin: 0;
 }
+
 h1 {
-    margin: 1rem auto;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#page-wrapper {
+    position: relative;
+    min-height: 91.8vh;
+    padding-bottom: 5rem;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    padding-top: 1rem;
+    background-color: #2F6690;
+    height: 2rem;
+    width: 100%;
     text-align: center;
 }
+
 header {
     padding: 1rem 1rem;
     border-radius: 15px;
@@ -23,6 +41,7 @@ header > .widgets {
     display: flex;
     flex-flow: row wrap;
     justify-content: left;
+    clear: both;
 }
 #content > p {
     width: 100%;

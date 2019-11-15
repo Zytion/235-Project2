@@ -1,6 +1,13 @@
 
 let displayTerm = "";
 
+window.onload = function(){
+    if (localStorage.getItem("savedRecipe") != null) {
+        document.querySelector('#recipe').value = localStorage.getItem("savedRecipe");
+        this.makeCorsRequest();
+    }
+}
+
 function createCORSRequest(method, url) {
     var xhr = new XMLHttpRequest();
     if ("withCredentials" in xhr) {
@@ -22,6 +29,7 @@ function makeCorsRequest() {
     let app_id = "df268d73";
     let app_key = "97e95525fd197c05a011ec8010791668";
     let recipe = document.querySelector('#recipe').value;
+    localStorage.setItem("savedRecipe", recipe);
     let pre = document.querySelector('#response');
 
     var url = 'https://api.edamam.com/search?app_id=' + app_id + '&app_key=' + app_key;
