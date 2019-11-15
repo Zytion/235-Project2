@@ -129,19 +129,21 @@ function showResults() {
 }
 
 function navClick(e) {
-    if(e.target.value == "next" && page < 90)
+    if(e.target.value == "next" && page < results.length - 9)
     {
         page += 10;
+        showResults();
     }
-    else if(page > 0)
+    else if(e.target.value == "prev" && page > 0)
     {
         page -= 10;
+        showResults();
     }
     else
     {
         alert("Cannot show any more Recipies")
     }
-    showResults();
+    
 }
 
 const navButtons = document.querySelectorAll('#navButtons button');
