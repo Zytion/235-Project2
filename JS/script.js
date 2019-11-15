@@ -117,8 +117,12 @@ function showResults() {
         if (!smallURL) smallURL = "Media/gif_finder_images/no-image-found.png";
 
         let url = result.recipe.url;
-        let line = `<div class='result'><img src='${smallURL}' title='${result.id}' />`;
-        line += `<div><a target='_blank' href='${url}'> View on Edamam </a></div></div>`;
+
+        let portions = result.recipe.yield;
+        let name = result.recipe.label;
+
+        let line = `<div class='result'><div><h2>${name}</h2> yeild = ${portions}</div><img src='${smallURL}' title='${result.id}' />`;
+        line += `<div><a target='_blank' href='${url}'> View Recipe </a></div></div>`;
 
         bigString += line;
     }
@@ -126,6 +130,7 @@ function showResults() {
     document.querySelector('#content').innerHTML = bigString;
 
     document.querySelector('#status').innerHTML = "<b>Success!</b>";
+    document.querySelector('#status').className
 }
 
 function navClick(e) {
