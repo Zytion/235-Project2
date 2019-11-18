@@ -27,6 +27,7 @@ function createCORSRequest(method, url) {
     }
     return xhr;
 }
+    let pre = document.querySelector('#response');
 
 // Make the actual CORS request.
 function makeCorsRequest() {
@@ -34,7 +35,8 @@ function makeCorsRequest() {
     let app_key = "97e95525fd197c05a011ec8010791668";
     let recipe = document.querySelector('#recipe').value;
     localStorage.setItem("savedRecipe", recipe);
-    let pre = document.querySelector('#response');
+
+    pre.innerHTML = "";
 
     var url = 'https://api.edamam.com/search?app_id=' + app_id + '&app_key=' + app_key;
 
@@ -103,11 +105,12 @@ function dataLoaded(e) {
     results = obj.hits;
     console.log("reulsts.length = " + results.length);
     page = 0;
+    pre.innerHTML = "<i>Here are " + results.length + " results for '" + displayTerm + "'</i>";
     showResults();
 }
 
 function showResults() {
-    let bigString = "<p><i>Here are 10 results for '" + displayTerm + "'</i></p>";
+    let bigString = "";
 
     for(let i = page; i < page + 10; i++)
     {
@@ -134,7 +137,7 @@ function showResults() {
 }
 
 function navClick(e) {
-    if(e.target.value == "next" && page < results.length - 9)
+    if(e.target.value == "next" && page < results.length - 10)
     {
         page += 10;
         showResults();
@@ -148,7 +151,6 @@ function navClick(e) {
     {
         alert("Cannot show any more Recipies")
     }
-    
 }
 
 const navButtons = document.querySelectorAll('#navButtons button');
