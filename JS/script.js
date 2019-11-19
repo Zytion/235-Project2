@@ -34,6 +34,13 @@ function makeCorsRequest() {
     let app_id = "df268d73";
     let app_key = "97e95525fd197c05a011ec8010791668";
     let recipe = document.querySelector('#recipe').value;
+
+    if(recipe == "")
+    {
+        alert('Please enter a search term');
+        return;
+    }
+
     localStorage.setItem("savedRecipe", recipe);
 
     pre.innerHTML = "";

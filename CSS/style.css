@@ -52,7 +52,7 @@ header > .widgets {
     background-color: rgba(108, 191, 255, 0.11);
     padding: 1em;
     margin: 1em;
-    width: 10vw;
+    width: 13%;
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
