@@ -79,7 +79,7 @@ function getData(url) {
     xhr.onload = dataLoaded;
 
     xhr.onerror = function () {
-        alert('Woops, there was an error making the request.');
+        alert('Whoops, there was an error making the request.');
     };
 
     xhr.open("GET", url);
@@ -119,9 +119,10 @@ function showResults() {
         let url = result.recipe.url;
 
         let portions = result.recipe.yield;
+        let time = result.recipe.totalTime;
         let name = result.recipe.label;
 
-        let line = `<div class='result'><div><h2>${name}</h2> yeild = ${portions}</div><img src='${smallURL}' title='${result.id}' />`;
+        let line = `<div class='result'><div><h2>${name}</h2>Yield: ${portions}<br>Time: ${time}</div><img src='${smallURL}' title='${result.id}' />`;
         line += `<div><a target='_blank' href='${url}'> View Recipe </a></div></div>`;
 
         bigString += line;
