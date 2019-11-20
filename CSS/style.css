@@ -1,17 +1,27 @@
 body {
     background-color: #FBFEF9;
     margin: 0;
+    background-image: url(../Media/cookingBackground1.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
 }
 
 h1 {
     text-align: center;
-    margin: 0 auto;
+    margin: 0.5em auto;
+    padding: 0.5em;
+    color: black;
+    /* background-color: rgb(183, 232, 255); */
 }
 
 #page-wrapper {
     position: relative;
     min-height: 91.8vh;
     padding-bottom: 5rem;
+    width: 80%;
+    background: white;
 }
 footer {
     position: absolute;
@@ -32,6 +42,7 @@ header {
 
     display: flex;
     flex-flow: row nowrap;
+    justify-content: center;
 }
 header > .widgets {
     margin-right: 1rem;
@@ -42,7 +53,7 @@ header > .widgets {
     flex-flow: row wrap;
     justify-content: space-around;
     clear: both;
-    width: 70%;
+    width: 90%;
 }
 #content > p {
     width: 100%;
@@ -87,4 +98,5 @@ main {
 
 #response {
     text-align: center;
+    margin: 0%;
 }
