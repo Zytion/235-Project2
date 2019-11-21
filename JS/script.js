@@ -1,11 +1,9 @@
-
 let displayTerm = "";
-
 let results;
-
 let page = 0;
 
-window.onload = function(){
+//saved recipe in local storage
+window.onload = function () {
     if (localStorage.getItem("savedRecipe") != null) {
         document.querySelector('#recipe').value = localStorage.getItem("savedRecipe");
         this.makeCorsRequest();
@@ -27,7 +25,7 @@ function createCORSRequest(method, url) {
     }
     return xhr;
 }
-    let pre = document.querySelector('#response');
+let pre = document.querySelector('#response');
 
 // Make the actual CORS request.
 function makeCorsRequest() {
@@ -35,16 +33,16 @@ function makeCorsRequest() {
     let app_key = "97e95525fd197c05a011ec8010791668";
     let recipe = document.querySelector('#recipe').value;
 
-    if(recipe == "")
-    {
+    //if recipe is empty, enter search term
+    if (recipe == "") {
         alert('Please enter a search term');
         return;
     }
-
+    //save items
     localStorage.setItem("savedRecipe", recipe);
-
     pre.innerHTML = "";
 
+    //start building URL
     var url = 'https://api.edamam.com/search?app_id=' + app_id + '&app_key=' + app_key;
 
     var xhr = createCORSRequest('POST', url);
@@ -53,15 +51,22 @@ function makeCorsRequest() {
         return;
     }
 
+    //get term
     let term = document.querySelector('#recipe').value;
     displayTerm = term;
-
     term = term.trim();
-
     term = encodeURIComponent(term);
-
+    //add to url
     url += "&q=" + term;
     url += "&to=99";
+    //get dietary restrictions
+    let checkedButtons = document.querySelectorAll('.dietaryRestrictions');
+    for (let i = 0; i < checkedButtons.length; i++) {
+        if (checkedButtons[i].checked) {
+            url += "&health=" + checkedButtons[i].value;
+        }
+    }
+    console.log(checkedButtons);
 
     console.log(url);
 
@@ -116,54 +121,64 @@ function dataLoaded(e) {
     showResults();
 }
 
+//SHOW RESULTS (BUILD HTML)
 function showResults() {
     let bigString = "";
 
-    for(let i = page; i < page + 10; i++)
-    {
+    for (let i = page; i < page + 10; i++) {
         let result = results[i];
 
         let smallURL = result.recipe.image;
         if (!smallURL) smallURL = "Media/gif_finder_images/no-image-found.png";
 
+        //get url of recipe, yield/servings, total time
         let url = result.recipe.url;
-
         let portions = result.recipe.yield;
         let time = result.recipe.totalTime;
+        //if there is no estimate on time (0 minutes), change phrases
+        if (time == 0) {
+            time = "N/A"
+        }
+        else {
+            time += " min";
+        }
+        //get name of recipe, cut off name if too long
         let name = result.recipe.label;
-
-        let line = `<div class='result'><div><h2>${name}</h2>Yield: ${portions}<br>Time: ${time}</div><img src='${smallURL}' title='${result.id}' />`;
-        line += `<div><a target='_blank' href='${url}'> View Recipe </a></div></div>`;
-
+        if (name.length > 42) {
+            name = name.substring(0, 42) + "...";
+        }
+        //build HTML
+        let line = `<div class='result'><div class="title"><h2>${name}</div><div class="info"></h2>Servings: ${portions}
+        <br>Time: ${time}</div><img src='${smallURL}' title='${result.id}' />`;
+        line += `<div class="link"><a target='_blank' href='${url}'> View Recipe </a></div></div>`;
         bigString += line;
     }
 
+    //put into HTML
     document.querySelector('#content').innerHTML = bigString;
 
     document.querySelector('#status').innerHTML = "<b>Success!</b>";
     document.querySelector('#status').className
 }
 
+//CLICK NEXT BUTTON/BACK BUTTON TO CHANGE PAGE
 function navClick(e) {
-    if(e.target.value == "next" && page < results.length - 10)
-    {
+    if (e.target.value == "next" && page < results.length - 10) {
         page += 10;
         showResults();
     }
-    else if(e.target.value == "prev" && page > 0)
-    {
+    else if (e.target.value == "prev" && page > 0) {
         page -= 10;
         showResults();
     }
-    else
-    {
-        alert("Cannot show any more Recipies")
+    else {
+        alert("Cannot show any more recipes.")
     }
 }
 
+//ADD EVENT LISTENERS TO BUTTONS
 const navButtons = document.querySelectorAll('#navButtons button');
-for(let navButton of navButtons)
-{
+for (let navButton of navButtons) {
     navButton.addEventListener("click", navClick);
 }
 document.querySelector("#search").addEventListener("click", makeCorsRequest);

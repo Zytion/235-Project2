@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="CSS/style.css">
     <link href="https://fonts.googleapis.com/css?family=Dancing+Script|Lato&display=swap" rel="stylesheet">
+    <!-- REQUIRED ATTRIBUTION, did not work in code but we put the picture + link to website -->
+    <script src="https://developer.edamam.com/attribution/badge.js"></script>
 
     <title>Project 2 - Recipe Finder</title>
 </head>
@@ -19,25 +21,20 @@
             <div class="widgets">
                 <input type="text" id="recipe" size="20" maxlength="20" autofocus="" value="Chicken and onion">
             </div>
+
+            <div class="widgets checkboxes">
+                <input class="dietaryRestrictions" type="checkbox" name="vegetarian" value="vegetarian">Vegetarian<br>
+                <input class="dietaryRestrictions" type="checkbox" name="vegan" value="vegan">Vegan<br>
+                <input class="dietaryRestrictions" type="checkbox" name="nut-free" value="nut-free">Nut-Free<br>
+            </div>
             <div class="widgets">
                 <button id="search" type="button">
                     Search
                 </button>
             </div>
+
             <small id="status"></small>
         </header>
-        <div id="navButtons">
-            <div class="widgets">
-                <button value="next" type="button">
-                    Next Page
-                </button>
-            </div>
-            <div class="widgets">
-                <button value="prev" type="button">
-                    Previous Page
-                </button>
-            </div>
-        </div>
         <div>
             <p id="response"></p>
         </div>
@@ -45,7 +42,20 @@
             <div id="content"></div>
         </main>
 
-        <footer>Uses API made by <a href="https://developer.edamam.com/">Edamam</a> | Mira Antolovich & Bobby Levin
+        <div id="navButtons">
+            <div class="widgets">
+                <button value="next" type="button">
+                    &gt;&gt;
+                </button>
+            </div>
+            <div class="widgets">
+                <button value="prev" type="button">
+                    &lt;&lt; </button>
+            </div>
+        </div>
+        <footer>
+            <a target="_blank" href="https://www.edamam.com/"><img src="Media/edamam.png"></a>| Mira Antolovich & Bobby
+            Levin
         </footer>
     </body>
 </div>
