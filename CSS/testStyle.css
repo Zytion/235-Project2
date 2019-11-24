@@ -35,10 +35,9 @@ header {
     margin: 0 auto;
     background-color: rgb(46, 100, 142, 0.8);
 
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-evenly;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     font-size: 1.5rem;
 
     box-shadow: 2px 2px 1px grey;
@@ -57,12 +56,12 @@ header > .widgets {
 }
 
 .instructions {
-    font-size: 0.7em;
+    font-size: 0.5em;
     padding: 0.5em;
     width: 10em;
 }
 
-#checkboxes {
+.checkboxes {
     padding: .5em;
 }
 
@@ -176,9 +175,6 @@ footer {
     width: 100%;
     text-align: center;
 }
-.fa {
-    padding: 0 0.1em;
-}
 
 .hidden {
     display: none;
@@ -196,10 +192,6 @@ footer {
     }
     header > .widgets {
         flex-flow: column nowrap;
-        justify-content: flex-start;
-    }
-    #recipe, #search, #checkboxes {
-        margin: auto;
     }
     #content {
         grid-template-columns: repeat(3, 1fr);
@@ -207,7 +199,7 @@ footer {
     .info {
         padding: 1em;
     }
-    #checkboxes {
+    .checkboxes {
         padding: 0.5em;
         font-size: 1em;
     }
@@ -217,9 +209,9 @@ footer {
     header {
         flex-flow: column nowrap;
         align-items: center;
-        width: max-content;
-        padding: 1em;
     }
+
+
     #content {
         grid-template-columns: repeat(2, 1fr);
     }

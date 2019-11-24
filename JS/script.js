@@ -64,7 +64,7 @@ function makeCorsRequest() {
     for (let i = 0; i < checkedButtons.length; i++) {
         if (checkedButtons[i].checked) {
             if (checkedButtons[i].value == "nut-free") {
-                url += "health=peanut-free&health=tree-nut-free"
+                url += "&health=peanut-free&health=tree-nut-free"
             }
             else {
                 url += "&health=" + checkedButtons[i].value;
@@ -162,8 +162,7 @@ function showResults() {
     //put into HTML
     document.querySelector('#content').innerHTML = bigString;
 
-    document.querySelector('#status').innerHTML = "<b>Success!</b>";
-    document.querySelector('#status').className
+    document.querySelector('#status').innerHTML = "<b>Search was successful!</b>";
 }
 
 //CLICK NEXT BUTTON/BACK BUTTON TO CHANGE PAGE
@@ -187,3 +186,23 @@ for (let navButton of navButtons) {
     navButton.addEventListener("click", navClick);
 }
 document.querySelector("#search").addEventListener("click", makeCorsRequest);
+
+function myFunction(x) {
+    let instructions = document.querySelectorAll(".instructions");
+
+    if (x.matches) { // If media query matches
+      for(let instruction of instructions)
+      {
+        instruction.className = "instructions hidden"
+      }
+    } else {
+        for(let instruction of instructions)
+        {
+          instruction.className = "instructions"
+        }
+    }
+  }
+  
+  var x = window.matchMedia("(max-width: 800px)")
+  myFunction(x) // Call listener function at run time
+  x.addListener(myFunction) // Attach listener function on state changes 
