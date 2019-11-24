@@ -63,7 +63,12 @@ function makeCorsRequest() {
     let checkedButtons = document.querySelectorAll('.dietaryRestrictions');
     for (let i = 0; i < checkedButtons.length; i++) {
         if (checkedButtons[i].checked) {
-            url += "&health=" + checkedButtons[i].value;
+            if (checkedButtons[i].value == "nut-free") {
+                url += "health=peanut-free&health=tree-nut-free"
+            }
+            else {
+                url += "&health=" + checkedButtons[i].value;
+            }
         }
     }
     console.log(checkedButtons);
