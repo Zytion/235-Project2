@@ -4,7 +4,10 @@ We chose the API and made sure it worked, then we proceeded to create a basic la
 ## Sources
 * https://developer.edamam.com/edamam-docs-recipe-api
 ## Requirements
-* All HTML, CSS, and JavaScript are organized in separate documents
+* We have a search bar, dietary restriction choice, and next/back buttons.
+* We have alerts for user-feedback if there is an error.
+* We have a bar for updating the user on what is going on.
+* All HTML, CSS, and JavaScript are organized in separate documents.
 ## Contribution
 ### Mira Antolovich
 Mira did the extra search functions for the API along with the local storage. She styled the recipe containers and search bars, buttons, and chose the font style. Mira started the responsive design and got the layout working.
