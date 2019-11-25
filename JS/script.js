@@ -153,8 +153,8 @@ function showResults() {
             name = name.substring(0, 42) + "...";
         }
         //build HTML
-        let line = `<div class='result'><div class="title"><h2>${name}</div><div class="info"></h2>Servings: ${portions}
-        <br>Time: ${time}</div><img src='${smallURL}' title='${result.id}' />`;
+        let line = `<div class='result'><div class="title"><h2>${name}</h2></div><div class="info">Servings: ${portions}
+        <br>Time: ${time}</div><div class="foodImage"><img src='${smallURL}' title='${result.id}' /></div>`;
         line += `<div class="link"><a target='_blank' href='${url}'> View Recipe </a></div></div>`;
         bigString += line;
     }
@@ -187,22 +187,20 @@ for (let navButton of navButtons) {
 }
 document.querySelector("#search").addEventListener("click", makeCorsRequest);
 
-function myFunction(x) {
+function hideInstructions(x) {
     let instructions = document.querySelectorAll(".instructions");
 
     if (x.matches) { // If media query matches
-      for(let instruction of instructions)
-      {
-        instruction.className = "instructions hidden"
-      }
+        for (let instruction of instructions) {
+            instruction.className = "instructions hidden"
+        }
     } else {
-        for(let instruction of instructions)
-        {
-          instruction.className = "instructions"
+        for (let instruction of instructions) {
+            instruction.className = "instructions"
         }
     }
-  }
-  
-  var x = window.matchMedia("(max-width: 800px)")
-  myFunction(x) // Call listener function at run time
-  x.addListener(myFunction) // Attach listener function on state changes 
+}
+
+var x = window.matchMedia("(max-width: 800px)")
+hideInstructions(x) // Call listener function at run time
+x.addListener(hideInstructions) // Attach listener function on state changes 
