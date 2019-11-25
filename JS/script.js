@@ -29,6 +29,8 @@ let pre = document.querySelector('#response');
 
 // Make the actual CORS request.
 function makeCorsRequest() {
+    document.querySelector('#next').className = "";
+    document.querySelector('#prev').className = "hidden";
     let app_id = "df268d73";
     let app_key = "97e95525fd197c05a011ec8010791668";
     let recipe = document.querySelector('#recipe').value;
@@ -122,7 +124,7 @@ function dataLoaded(e) {
     results = obj.hits;
     console.log("reulsts.length = " + results.length);
     page = 0;
-    pre.innerHTML = "<i>Here are " + results.length + " results for '" + displayTerm + "'</i>";
+    pre.innerHTML = "<i>Here are " + (results.length + 1) + " results for '" + displayTerm + "'</i>";
     showResults();
 }
 
@@ -167,6 +169,19 @@ function showResults() {
 
 //CLICK NEXT BUTTON/BACK BUTTON TO CHANGE PAGE
 function navClick(e) {
+    if (page == results.length - 29 && e.target.value == "next") {
+        document.querySelector('#next').className = "hidden";
+        document.querySelector('#prev').className = "";
+    }
+    else if (page == 10 && e.target.value == "prev") {
+        document.querySelector('#prev').className = "hidden";
+        document.querySelector('#next').className = "";
+    }
+    else {
+        document.querySelector('#next').className = "";
+        document.querySelector('#prev').className = "";
+    }
+    
     if (e.target.value == "next" && page < results.length - 10) {
         page += 10;
         showResults();
@@ -175,9 +190,8 @@ function navClick(e) {
         page -= 10;
         showResults();
     }
-    else {
-        alert("Cannot show any more recipes.")
-    }
+
+    console.log("Page :" + page + "\nResults: " + (results.length - 19));
 }
 
 //ADD EVENT LISTENERS TO BUTTONS
