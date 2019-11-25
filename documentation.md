@@ -3,6 +3,7 @@
 We chose the API and made sure it worked by creating a prototype layout using the GIF-finder HW, then we proceeded to create a basic layout of what we wanted our project to look like. After connecting to the API, we started working on making the website look like our mock-up. Once we organised all the results in a CSS grid, we started working on the next and back buttons. After finishing that, we worked on the responsiveness of the website while making it more user-friendly. Finally we fixed up any issues, polished our display, and validated our code.
 ## Sources
 * https://developer.edamam.com/edamam-docs-recipe-api
+* https://www.w3schools.com/
 ## Requirements
 * We have a search bar, dietary restriction choice, and next/back buttons.
 * We have alerts for user-feedback if there is an error.
