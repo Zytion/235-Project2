@@ -181,7 +181,7 @@ function navClick(e) {
         document.querySelector('#next').className = "";
         document.querySelector('#prev').className = "";
     }
-    
+
     if (e.target.value == "next" && page < results.length - 10) {
         page += 10;
         showResults();
@@ -189,6 +189,10 @@ function navClick(e) {
     else if (e.target.value == "prev" && page > 0) {
         page -= 10;
         showResults();
+    }
+    else
+    {
+        alert("Cannot Load Page!");
     }
 
     console.log("Page :" + page + "\nResults: " + (results.length - 19));
