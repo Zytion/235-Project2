@@ -34,7 +34,7 @@ function makeCorsRequest() {
     document.querySelector('#next').className = "";
     document.querySelector('#prev').className = "hidden";
     //set content to loading img
-    document.querySelector('#content').innerHTML = `<div id="loadingImg"><img src="../Media/loading.gif" alt=""/></div>`;
+    document.querySelector('#content').innerHTML = `<div id="loadingImg"><img src="Media/loading.gif" alt=""/></div>`;
     //reset status
     document.querySelector("#status").innerHTML = "";
 
@@ -83,20 +83,7 @@ function makeCorsRequest() {
     console.log(checkedButtons);
 
     console.log(url);
-
-    // // Response handlers.
-    // xhr.onload = function() {
-    //   var text = xhr.responseText;
-    //   pre.innerHTML = text;
-    // };
-
-    // xhr.onerror = function() {
-    //   alert('Woops, there was an error making the request.');
-    // };
-
-    // pre.innerHTML = 'Loading...';
-    // xhr.setRequestHeader('Content-Type', 'application/json');
-    // xhr.send(recipe);
+    
     getData(url);
 }
 

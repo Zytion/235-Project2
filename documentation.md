@@ -5,6 +5,7 @@ We chose the API and made sure it worked by creating a prototype layout using th
 * Documentation of API Used: https://developer.edamam.com/edamam-docs-recipe-api
 * Loading Image: http://c.s-microsoft.com/en-us/CMSImages/minifindstore_spin.gif?version=45117834-d17e-3a16-5765-62399907b530
 * Background Image: http://blog.runningwarehouse.com/nutrition/food-as-fuel-recipes-for-the-runner/ 
+* Used Info from: https://www.w3schools.com/
 ## Requirements
 * We have a search bar, dietary restriction choice, and next/back buttons.
 * We have alerts for user-feedback if there is an error.
