@@ -77,7 +77,6 @@ header > .widgets {
     border: 1px solid grey;
     border-radius: 15px;
     width: 80%;
-    height: max-content;
     background-color: rgba(140, 205, 255, 0.753);
     padding: 1em;
     margin: 1em 0;
@@ -168,6 +167,15 @@ footer {
     justify-content: center;
     align-items: center;
 }
+
+footer a {
+    color: black;
+}
+
+footer a:visited {
+    color: initial;
+}
+
 .fa {
     padding: 0 0.1em;
 }
@@ -175,6 +183,17 @@ footer {
 .hidden {
     display: none;
 }
+
+#loadingImg {
+    height: 20vw;
+    width: 20vw;
+    grid-column: 1 / span 5;
+}
+#loadingImg > img {
+    height: 100%;
+    width: 100%;
+}
+
 /* RESPONSIVENESS */
 @media screen and (max-width: 1600px) {
     #content {

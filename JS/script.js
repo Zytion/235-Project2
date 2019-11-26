@@ -6,8 +6,9 @@ let page = 0;
 window.onload = function () {
     if (localStorage.getItem("savedRecipe") != null) {
         document.querySelector('#recipe').value = localStorage.getItem("savedRecipe");
-        this.makeCorsRequest();
+        
     }
+    this.makeCorsRequest();
 }
 
 function createCORSRequest(method, url) {
@@ -29,8 +30,14 @@ let pre = document.querySelector('#response');
 
 // Make the actual CORS request.
 function makeCorsRequest() {
+    //Reset buttons
     document.querySelector('#next').className = "";
     document.querySelector('#prev').className = "hidden";
+    //set content to loading img
+    document.querySelector('#content').innerHTML = `<div id="loadingImg"><img src="../Media/loading.gif" alt=""/></div>`;
+    //reset status
+    document.querySelector("#status").innerHTML = "";
+
     let app_id = "df268d73";
     let app_key = "97e95525fd197c05a011ec8010791668";
     let recipe = document.querySelector('#recipe').value;
@@ -221,4 +228,4 @@ function hideInstructions(x) {
 
 var x = window.matchMedia("(max-width: 800px)")
 hideInstructions(x) // Call listener function at run time
-x.addListener(hideInstructions) // Attach listener function on state changes 
+x.addListener(hideInstructions) // Attach listener function on state changes
